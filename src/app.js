@@ -3,6 +3,7 @@ const app = express();
 const path = require('path');
 const hbs = require('hbs');
 const bodyParser = require('body-parser');
+const usuario = require('./usuario');
 require('./helpers')
 
 const directoriopublico = path.join(__dirname, '../public');
@@ -36,13 +37,37 @@ app.get('/registro', (req, res) =>{
 });
 
 app.post('/registro', (req, res) =>{
-  res.render('registros', {
+  res.render('registroexitoso', {
     nombre: req.body.nombre,
     cedula: parseInt(req.body.cedula),
     correo: req.body.correo,
     telefono: parseInt(req.body.telefono)
   });
 });
+
+app.post('/login', (req,res) => {
+  let exito = usuario.autenticar(req.body.nombre, parseInt(req.body.cedula));
+  if (!exito) {
+    res.render('login', {
+      alerta:'Nombre de usuario o cedula incorrectos'
+    });
+  }else {
+    switch (exito.rol) {
+      case 'aspirante':
+        res.render('aspirante', {
+          nombre:exito.nombre,
+          rol:exito.rol
+        });
+        break;
+      case 'coordinador':
+        res.render('coordinador', {
+          nombre:exito.nombre,
+          rol:exito.rol
+        });
+        break;
+    }
+  }
+})
 
 app.get('*', (req, res) => {
   res.render('error', {

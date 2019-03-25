@@ -2,7 +2,9 @@
     <h2>
       Ingreso usuario
     </h2>
-
+    <p style="color:red;">
+      {{alerta}}
+    </p>
 
     <form action="/login" method="post">
       <input type="text" name="nombre" required>
@@ -12,5 +14,7 @@
 
     <button type="button" name="Volver al inicio" onclick="location.href='./'">Volver al inicio</button>
     <button type="button" name="registrarse" onclick="location.href='./registro'">Registrate!</button>
+
+
 
 {{>footer}}

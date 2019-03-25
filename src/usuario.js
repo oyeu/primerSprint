@@ -48,6 +48,17 @@ const guardar = ()=> {
   })
 };
 
+const autenticar = (nombre, cedula) => {
+  listar();
+  let solicitante = listadoUsuarios.find(sol => sol.documento === cedula && sol.nombre === nombre);
+  if (!solicitante) {
+    return false;
+  }else {
+    return solicitante;
+  }
+}
+
 module.exports = {
-  crear
+  crear,
+  autenticar
 }
