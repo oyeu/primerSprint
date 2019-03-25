@@ -1,0 +1,16 @@
+{{>header}}
+    <p>
+      Registro usuario
+    </p>
+
+    <form action="/registro" method="post">
+      <input type="text" name="nombre" required>
+      <input type="number" name="cedula" required>
+      <input type="text" name="correo" required>
+      <input type="number" name="telefono" required>
+      <button>registrarse</button>
+    </form>
+
+    <button type="button" name="Volver al inicio" onclick="location.href='./'">Volver al inicio</button>
+
+{{>footer}}

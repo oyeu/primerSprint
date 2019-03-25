@@ -25,6 +25,16 @@ app.get('/', (req, res) =>{
   });
 });
 
+app.get('/login', (req, res) =>{
+  res.render('login', {
+  });
+});
+
+app.get('/registro', (req, res) =>{
+  res.render('registro', {
+  });
+});
+
 app.post('/registro', (req, res) =>{
   res.render('registros', {
     nombre: req.body.nombre,
