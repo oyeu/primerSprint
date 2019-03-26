@@ -10,7 +10,8 @@ const crear = (nombre, documento, correo, telefono) => {
     correo:correo,
     telefono:telefono,
     rol:'aspirante',
-    listaCursos:[]
+    listaCursos:[],
+    estado:true
   };
   if (listadoUsuarios.length==0) {
     listadoUsuarios.push(user);
