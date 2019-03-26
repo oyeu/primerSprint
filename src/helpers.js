@@ -8,9 +8,9 @@ hbs.registerHelper('crearCurso', curso.crearcurso);
 hbs.registerHelper('listar', () => {
     listadoCursos = require('./listadoCursos.json')
     if (!listadoCursos.length) {
-      return "no hay cursos creados"
-    }else {
-      let texto = "<table> \
+        return "no hay cursos creados"
+    } else {
+        let texto = "<table> \
       <thead> \
       <th> Nombre </th> \
       <th> Id </th> \
@@ -22,21 +22,21 @@ hbs.registerHelper('listar', () => {
       </thead> \
       <tbody>";
 
-      listadoCursos.forEach(curso => {
-        texto = texto +
-<<<<<<< HEAD
-            '<tr>' +
-            '<td>' + curso.nombre + '</td>' +
-            '<td>' + curso.id + '<tyd>' +
-            '<td>' + curso.descripcion + '</td>' +
-            '<td>' + curso.valor + '</td>' +
-            '<td>' + curso.modalidad + '</td>' +
-            '<td>' + curso.ih + '</td>' +
-            '<td>' + curso.estado + '</td></tr>';
+        listadoCursos.forEach(curso => {
+            texto = texto +
+                '<tr>' +
+                '<td>' + curso.nombre + '</td>' +
+                '<td>' + curso.id + '<tyd>' +
+                '<td>' + curso.descripcion + '</td>' +
+                '<td>' + curso.valor + '</td>' +
+                '<td>' + curso.modalidad + '</td>' +
+                '<td>' + curso.ih + '</td>' +
+                '<td>' + curso.estado + '</td></tr>';
 
-    })
-    texto = texto + '</tbody></table>';
-    return texto;
+        })
+        texto = texto + '</tbody></table>';
+        return texto;
+    }
 })
 
 hbs.registerHelper('listarCursos', () => {
@@ -63,19 +63,18 @@ hbs.registerHelper('listarCursos', () => {
             '<td>' + curso.modalidad + '</td>' +
             '<td>' + curso.ih + '</td>' +
             '<td>' + curso.estado + '</td></tr>';
-=======
+
         '<tr>' +
         '<td>' + curso.nombre + '</td>' +
-        '<td>' + curso.id + '<tyd>' +
-        '<td>' + curso.descripcion + '</td>' +
-        '<td>' + curso.valor + '</td>' +
-        '<td>' + curso.modalidad + '</td>' +
-        '<td>' + curso.ih + '</td>' +
-        '<td>' + curso.estado + '</td></tr>';
->>>>>>> 5d6c2604010b3f8ee70df7dd3264bb4f33e84c98
+            '<td>' + curso.id + '<tyd>' +
+            '<td>' + curso.descripcion + '</td>' +
+            '<td>' + curso.valor + '</td>' +
+            '<td>' + curso.modalidad + '</td>' +
+            '<td>' + curso.ih + '</td>' +
+            '<td>' + curso.estado + '</td></tr>';
+    })
+    texto = texto + '</tbody></table>';
+    return texto;
 
-      })
-      texto = texto + '</tbody></table>';
-      return texto;      
-    }
+
 })
