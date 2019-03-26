@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 [{"nombre":"mate","id":1,"ih":1,"valor":1,"modalidad":"presencial","estado":"disponible"},{"nombre":"ingles","id":2,"descripcion":"nivel basico","ih":2,"valor":121,"modalidad":"presencial","estado":"disponible"},{"nombre":"mate","id":4,"descripcion":"nivel basico","ih":434,"valor":343,"modalidad":"presencial","estado":"disponible"}]
+=======
+[{"nombre":"sad","id":2,"ih":45,"valor":4545,"modalidad":"asdasd","estado":"disponible"},{"nombre":"programacion","id":3,"descripcion":"node","ih":48,"valor":5454,"modalidad":"virtual","estado":"disponible"},{"nombre":"matematicas","id":1,"descripcion":"aritmetica","ih":48,"valor":120000,"modalidad":"presencial","estado":"cerrado"},{"nombre":"español","id":4,"descripcion":"verbos","ih":64,"valor":100000,"modalidad":"presencial","estado":"cerrado"}]
+>>>>>>> 3d6756cb78cc92d9533dcdefbc92038066e85e7b
