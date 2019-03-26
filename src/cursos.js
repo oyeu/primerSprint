@@ -1,7 +1,5 @@
 const fs = require('fs');
 
-/* let listadoUsuarios = []; */
-
 let listadoCursos = [];
 
 const crearcurso = (nombre, id, descripcion, ih, valor, modalidad) => {
@@ -27,7 +25,7 @@ const crearcurso = (nombre, id, descripcion, ih, valor, modalidad) => {
             listadoCursos.push(user);
             console.log(listadoCursos);
             guardar();
-            return "Usuario creado con exito"
+            return "Curso creado con exito"
         } else {
             return "Ese numero de id ya se encuentra en uso"
         }

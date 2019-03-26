@@ -27,7 +27,37 @@ hbs.registerHelper('listar', () => {
             '<td>' + curso.descripcion + '</td>' +
             '<td>' + curso.valor + '</td>' +
             '<td>' + curso.modalidad + '</td>' +
-            '<td>' + curso.intensidad_horaria + '</td>' +
+            '<td>' + curso.ih + '</td>' +
+            '<td>' + curso.estado + '</td></tr>';
+
+    })
+    texto = texto + '</tbody></table>';
+    return texto;
+})
+
+hbs.registerHelper('listarCursos', () => {
+    listadoCursos = require('./listadoCursos.json')
+    let texto = "<table class='table table-striped'> \
+             <thead class='thead-dark'> \
+             <th> Nombre </th> \
+             <th> Id </th> \
+             <th> Descripción </th> \
+             <th> Valor </th> \
+             <th> Modalidad </th> \
+             <th> Intensidad horaria </th> \
+             <th> estado </th> \
+             </thead> \
+             <tbody>";
+
+    listadoCursos.forEach(curso => {
+        texto = texto +
+            '<tr>' +
+            '<td>' + curso.nombre + '</td>' +
+            '<td>' + curso.id + '<tyd>' +
+            '<td>' + curso.descripcion + '</td>' +
+            '<td>' + curso.valor + '</td>' +
+            '<td>' + curso.modalidad + '</td>' +
+            '<td>' + curso.ih + '</td>' +
             '<td>' + curso.estado + '</td></tr>';
 
     })
