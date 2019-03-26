@@ -1,0 +1,14 @@
+{{>header}}
+    <p>
+      Creacion de cursos
+    </p>
+    <p>
+      {{crearCurso nombre id despcripcion valor ih modalidad}}
+    </p>
+    <p>
+    Los datos del curso son:   nombre: {{nombre}}, descripcion:{{descripcion}}, identificador: {{id}}, intensidad horaria: {{ih}}, valor: {{valor}}, modalidad: {{modalidad}}
+    </p>
+
+    <button type="button" name="volver al inicio" onclick="location.href='./'">Volver al inicio</button>
+    <button type="button" name="ingresar" onclick="location.href='./login'">Ingresar</button>
+{{>footer}}

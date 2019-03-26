@@ -1,12 +1,13 @@
-const hbs =  require('hbs');
+const hbs = require('hbs');
 const usuario = require('./usuario');
 const curso = require('./cursos');
 
-hbs.registerHelper('crearUsuario',usuario.crear);
+hbs.registerHelper('crearUsuario', usuario.crear);
+hbs.registerHelper('crearCurso', curso.crearcurso);
 
-hbs.registerHelper('listar', ()=>{
-  listadoCursos = require('./listadoCursos.json')
-  let texto = "<table> \
+hbs.registerHelper('listar', () => {
+    listadoCursos = require('./listadoCursos.json')
+    let texto = "<table> \
                <thead> \
                <th> Nombre </th> \
                <th> Id </th> \
@@ -18,8 +19,8 @@ hbs.registerHelper('listar', ()=>{
                </thead> \
                <tbody>";
 
-  listadoCursos.forEach(curso => {
-    texto = texto +
+    listadoCursos.forEach(curso => {
+        texto = texto +
             '<tr>' +
             '<td>' + curso.nombre + '</td>' +
             '<td>' + curso.id + '<tyd>' +
@@ -29,7 +30,7 @@ hbs.registerHelper('listar', ()=>{
             '<td>' + curso.intensidad_horaria + '</td>' +
             '<td>' + curso.estado + '</td></tr>';
 
-  })
-  texto = texto + '</tbody></table>';
-  return texto;
+    })
+    texto = texto + '</tbody></table>';
+    return texto;
 })

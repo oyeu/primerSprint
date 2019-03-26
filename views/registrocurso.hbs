@@ -1,0 +1,18 @@
+{{>header}}
+    <p>
+      Registro curso
+    </p>
+
+    <form action="/registrocurso" method="post">
+      <input type="text" name="nombre" required>
+      <input type="number" name="id" required>
+      <input type="text" name="descripcion" required>
+      <input type="number" name="valor" required>
+       <input type="text" name="modalidad">
+        <input type="number" name="ih" required>
+      <button>registrarse</button>
+    </form>
+
+    <button type="button" name="Volver al inicio" onclick="location.href='./'">Volver al inicio</button>
+
+{{>footer}}
