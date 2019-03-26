@@ -1,4 +1,16 @@
 {{>header}}
     <h3>Bienvenido {{nombre}} a la interfaz de {{rol}}</h3>
 
+    {{{listarDisponibles}}}
+    <br>
+
+    <h4 style="color:blue;">¿Quieres inscribirte a algun curso?</h4>
+    <h5>Ingresa el id y dale al botón</h5>
+
+    <form action="" method="post">
+      <label for="id">Id del curso</label>
+      <input type="number" name="id curso" required id="id">
+
+      <button>Incribirse al curso</button>
+    </form>
 {{>footer}}
