@@ -6,7 +6,7 @@ let listadoCursos = [];
 
 const crearcurso = (nombre, id, descripcion, ih, valor, modalidad) => {
     listar();
-    let user = {
+    let curso = {
         nombre: nombre,
         id: id,
         descripcion: descripcion,
@@ -17,17 +17,17 @@ const crearcurso = (nombre, id, descripcion, ih, valor, modalidad) => {
 
     };
     if (listadoCursos.length == 0) {
-        listadoCursos.push(user);
+        listadoCursos.push(curso);
         console.log(listadoCursos);
         guardar();
         return "curso creado con exito"
     } else {
-        let duplicado = listadoCursos.find(iden => iden.id == user.id);
+        let duplicado = listadoCursos.find(iden => iden.id == curso.id);
         if (!duplicado) {
-            listadoCursos.push(user);
+            listadoCursos.push(curso);
             console.log(listadoCursos);
             guardar();
-            return "Usuario creado con exito"
+            return "Curso creado con exito"
         } else {
             return "Ese numero de id ya se encuentra en uso"
         }

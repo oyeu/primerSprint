@@ -1,1 +1,1 @@
-[{"nombre":"matematicas","id":100,"descripcion":"aritmetica","valor":1500,"modalidad":"presencial","intensidad_horaria":"48 horas","estado":true},{"nombre":"ingles","id":101,"descripcion":"tobe","valor":2000,"modalidad":"virtual","intensidad_horaria":"48 horas","estado":false},{"nombre":"mate","id":1,"ih":1,"valor":1,"modalidad":"presencial","estado":"disponible"}]
+[{"nombre":"sad","id":2,"ih":45,"valor":4545,"modalidad":"asdasd","estado":"disponible"},{"nombre":"programacion","id":3,"descripcion":"node","ih":48,"valor":5454,"modalidad":"virtual","estado":"disponible"}]
