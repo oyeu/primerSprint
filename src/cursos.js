@@ -1,7 +1,5 @@
 const fs = require('fs');
 
-/* let listadoUsuarios = []; */
-
 let listadoCursos = [];
 
 const crearcurso = (nombre, id, descripcion, ih, valor, modalidad) => {

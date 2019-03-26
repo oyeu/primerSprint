@@ -32,7 +32,9 @@ app.get('/login', (req, res) => {
 app.get('/registro', (req, res) => {
     res.render('registro', {});
 });
-
+app.get('/cursoscreados', (req, res) => {
+    res.render('cursoscreados', {});
+});
 app.get('/registrocurso', (req, res) => {
     res.render('registrocurso', {});
 });
