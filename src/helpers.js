@@ -5,7 +5,6 @@ const curso = require('./cursos');
 hbs.registerHelper('crearUsuario', usuario.crear);
 hbs.registerHelper('crearCurso', curso.crearcurso);
 
-<<<<<<< HEAD
 hbs.registerHelper('listar', () => {
     listadoCursos = require('./listadoCursos.json')
     if (!listadoCursos.length) {
@@ -40,8 +39,6 @@ hbs.registerHelper('listar', () => {
     }
 })
 
-=======
->>>>>>> 3d6756cb78cc92d9533dcdefbc92038066e85e7b
 hbs.registerHelper('listarCursos', () => {
     listadoCursos = require('./listadoCursos.json')
     let texto = "<table class='table table-striped'> \
@@ -66,7 +63,6 @@ hbs.registerHelper('listarCursos', () => {
             '<td>' + curso.modalidad + '</td>' +
             '<td>' + curso.ih + '</td>' +
             '<td>' + curso.estado + '</td></tr>';
-<<<<<<< HEAD
 
         '<tr>' +
         '<td>' + curso.nombre + '</td>' +
@@ -82,50 +78,3 @@ hbs.registerHelper('listarCursos', () => {
 
 
 })
-=======
-      })
-      texto = texto + '</tbody></table>';
-      return texto;
-    })
-
-hbs.registerHelper('listarDisponibles', () => {
-    listadoCursos = require('./listadoCursos.json')
-    if (!listadoCursos.length) {
-      return "no hay cursos creados"
-    }else {
-
-      let disponibles = listadoCursos.filter(cursos => cursos.estado ==="disponible")
-      if (!disponibles) {
-        return "Todos los cursos se han cerrado"
-      }else {
-
-        let texto = "<table> \
-        <thead> \
-        <th> Nombre </th> \
-        <th> Id </th> \
-        <th> Descripción </th> \
-        <th> Valor </th> \
-        <th> Modalidad </th> \
-        <th> Intensidad horaria </th> \
-        <th> estado </th> \
-        </thead> \
-        <tbody>";
-
-        disponibles.forEach(curso => {
-          texto = texto +
-          '<tr>' +
-          '<td>' + curso.nombre + '</td>' +
-          '<td>' + curso.id + '<tyd>' +
-          '<td>' + curso.descripcion + '</td>' +
-          '<td>' + curso.valor + '</td>' +
-          '<td>' + curso.modalidad + '</td>' +
-          '<td>' + curso.ih + '</td>' +
-          '<td>' + curso.estado + '</td></tr>';
-
-        })
-        texto = texto + '</tbody></table>';
-        return texto;
-      }
-    }
-})
->>>>>>> 3d6756cb78cc92d9533dcdefbc92038066e85e7b
