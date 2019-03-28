@@ -79,3 +79,38 @@ hbs.registerHelper('listarDisponibles', () => {
       }
     }
 })
+
+hbs.registerHelper('miscursos', (aspirante) =>{
+  listadoCursos = require('./listadoCursos.json')
+  if (!aspirante.listaCursos.length) {
+    return "No tienes cursos inscritos"
+  }else {
+
+    let texto = "<table class='table table-striped'> \
+                <thead class='thead-dark'> \
+                <th> Nombre </th> \
+                <th> Id </th> \
+                <th> Descripción </th> \
+                <th> Valor </th> \
+                <th> Modalidad </th> \
+                <th> Intensidad horaria </th> \
+                <th> estado </th> \
+                </thead> \
+                <tbody>";
+
+    aspirante.listaCursos.forEach(id => {
+      let curso = listadoCursos.find(crc => crc.id === id);
+      texto = texto +
+              '<tr>' +
+              '<td>' + curso.nombre + '</td>' +
+              '<td>' + curso.id + '<tyd>' +
+              '<td>' + curso.descripcion + '</td>' +
+              '<td>' + curso.valor + '</td>' +
+              '<td>' + curso.modalidad + '</td>' +
+              '<td>' + curso.ih + '</td>' +
+              '<td>' + curso.estado + '</td></tr>';
+    })
+    texto = texto + '</tbody></table>';
+    return texto;
+  }
+})

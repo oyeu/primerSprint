@@ -1,16 +1,28 @@
 {{>header}}
-    <h3>Bienvenido {{nombre}} a la interfaz de {{rol}}</h3>
+    <h2>Bienvenido {{nombre}} a la interfaz de {{rol}}</h2>
+    <br>
+    <h3 style="text-align:center">Tus cursos</h3>
 
-    {{{listarDisponibles}}}
+    {{{miscursos aspirante}}}
     <br>
 
     <h4 style="color:blue;">¿Quieres inscribirte a algun curso?</h4>
     <h5>Ingresa el id y dale al botón</h5>
 
-    <form action="" method="post">
+    <form action="/matricula" method="post">
       <label for="id">Id del curso</label>
-      <input type="number" name="id curso" required id="id">
+      <input type="number" name="idcurso" required id="id">
 
       <button>Incribirse al curso</button>
     </form>
+    <br>
+
+    <p style="color:green;">
+      <b>
+        {{confirmacion}}
+      </b>
+    </p>
+    <h3 style="text-align:center">Cursos disponibles</h3>
+    {{{listarDisponibles}}}
+
 {{>footer}}

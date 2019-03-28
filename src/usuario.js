@@ -10,8 +10,7 @@ const crear = (nombre, documento, correo, telefono) => {
     correo:correo,
     telefono:telefono,
     rol:'aspirante',
-    listaCursos:[],
-    estado:true
+    listaCursos:[]
   };
   if (listadoUsuarios.length==0) {
     listadoUsuarios.push(user);
@@ -45,7 +44,7 @@ const guardar = ()=> {
   let datos = JSON.stringify(listadoUsuarios);
   fs.writeFile('./src/listadoUsuarios.json', datos, (err)=>{
     if (err) throw (err);
-    console.log("Archivo creado con exito!");
+    console.log("Usuarios guardados");
   })
 };
 
@@ -61,5 +60,6 @@ const autenticar = (nombre, cedula) => {
 
 module.exports = {
   crear,
-  autenticar
+  autenticar,
+  guardar
 }

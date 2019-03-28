@@ -4,6 +4,7 @@ const path = require('path');
 const hbs = require('hbs');
 const bodyParser = require('body-parser');
 const usuario = require('./usuario');
+const curso = require('./cursos')
 require('./helpers')
 
 const directoriopublico = path.join(__dirname, '../public');
@@ -18,17 +19,15 @@ app.use('/js', express.static(dirNode_modules + '/jquery/dist'));
 app.use('/js', express.static(dirNode_modules + '/popper.js/dist'));
 app.use('/js', express.static(dirNode_modules + '/bootstrap/dist/js'));
 
+let usuariologeado;
 
 app.set('view engine', 'hbs');
-
 app.get('/', (req, res) => {
     res.render('index', {});
 });
-
 app.get('/login', (req, res) => {
     res.render('login', {});
 });
-
 app.get('/registro', (req, res) => {
     res.render('registro', {});
 });
@@ -39,6 +38,16 @@ app.get('/registrocurso', (req, res) => {
     res.render('registrocurso', {});
 });
 
+app.post('/matricula', (req,res) => {
+  let texto = curso.matricularCursoId(parseInt(req.body.idcurso), usuariologeado);
+  res.render('aspirante', {
+      nombre: usuariologeado.nombre,
+      rol: usuariologeado.rol,
+      confirmacion:texto,
+      aspirante: usuariologeado
+  });
+})
+
 app.post('/registro', (req, res) => {
     res.render('registroexitoso', {
         nombre: req.body.nombre,
@@ -47,7 +56,6 @@ app.post('/registro', (req, res) => {
         telefono: parseInt(req.body.telefono)
     });
 });
-
 
 app.post('/registrocurso', (req, res) => {
     res.render('mostrarcurso', {
@@ -59,6 +67,7 @@ app.post('/registrocurso', (req, res) => {
         ih: parseInt(req.body.ih)
     });
 });
+
 app.post('/login', (req, res) => {
     let exito = usuario.autenticar(req.body.nombre, parseInt(req.body.cedula));
     if (!exito) {
@@ -66,11 +75,13 @@ app.post('/login', (req, res) => {
             alerta: 'Nombre de usuario o cedula incorrectos'
         });
     } else {
+        usuariologeado=exito;
         switch (exito.rol) {
             case 'aspirante':
                 res.render('aspirante', {
                     nombre: exito.nombre,
-                    rol: exito.rol
+                    rol: exito.rol,
+                    aspirante:usuariologeado
                 });
                 break;
             case 'coordinador':
