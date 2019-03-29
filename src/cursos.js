@@ -51,25 +51,47 @@ const guardar = () => {
 };
 
 const matricularCursoId = (id, estudiante) => {
+
+
+
   listar();
   let curso = listadoCursos.find(cur => cur.id===id)
   if (!curso) {
-    return  "el id ingresado no corresponde a ningun curso disponible"
+    return  [estudiante,false]
   }else {
     if (curso.matriculados.find(est => est===estudiante.documento)) {
-      return "Ya estas matriculado en este curso"
+      return [estudiante,false]
     }else {
       curso.matriculados.push(estudiante.documento);
       guardar();
       estudiante.listaCursos.push(curso.id);
       usuario.guardar()
-      return "Te has matriculado al curso: " + curso.nombre;
+      return [estudiante,true];
+      //return "Te has matriculado al curso: " + curso.nombre;
+
     }
   }
 }
 
 
+
+const eliminarinscrito = (id,documento)=>{
+listar();
+let eliminados = listadoCursos.filter(buscar => !(buscar.id == id && buscar.documento == documento));
+if(eliminados.length == listadoCursos.length){
+        return('No se ha capturado el id para eliminar');
+}else{
+       listadoCursos=eliminados;
+       guardar();
+       listar();
+       return 'Se elimino el aspirante'
+};
+}
+
+
 module.exports = {
     crearcurso,
-    matricularCursoId
+    matricularCursoId,
+    eliminarinscrito
+
 }

@@ -38,14 +38,26 @@ app.get('/registrocurso', (req, res) => {
     res.render('registrocurso', {});
 });
 
-app.post('/matricula', (req,res) => {
+app.post('/matricula', (req,res) => {  
   let texto = curso.matricularCursoId(parseInt(req.body.idcurso), usuariologeado);
-  res.render('aspirante', {
+  console.log(texto);
+
+  usuariologeado=texto[0];
+  let mensaje =""
+
+    if(texto[1]){
+        mensaje ="Estudiante ingresado correctamente";
+    }else{
+      mensaje="Ya esta registrado al curso"
+  }
+
+res.render('aspirante', {
       nombre: usuariologeado.nombre,
       rol: usuariologeado.rol,
-      confirmacion:texto,
+      confirmacion:mensaje,
       aspirante: usuariologeado
   });
+
 })
 
 app.post('/registro', (req, res) => {
@@ -56,6 +68,19 @@ app.post('/registro', (req, res) => {
         telefono: parseInt(req.body.telefono)
     });
 });
+
+app.post('/eliminaCursoAspirante', (req,res) => {    
+   console.log(req.body.id);
+  let texto = curso.eliminarinscrito(req.body.id,usuariologeado);
+   res.render('aspirante', {
+      nombre: usuariologeado.nombre,
+      rol: usuariologeado.rol,
+      confirmacion:texto,
+      aspirante: usuariologeado
+  });
+  
+})
+
 
 app.post('/registrocurso', (req, res) => {
     res.render('mostrarcurso', {
