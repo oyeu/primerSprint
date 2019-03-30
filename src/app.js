@@ -34,11 +34,6 @@ app.get('/registro', (req, res) => {
 app.get('/cursoscreados', (req, res) => {
     res.render('cursoscreados', {});
 });
-app.get('*', (req, res) => {
-    res.render('error', {
-        estudiante: 'error mijo'
-    });
-});
 app.get('/registrocurso', (req, res) => {
     res.render('registrocurso', {});
 });
@@ -106,7 +101,7 @@ app.post('/registrocurso', (req, res) => {
     });
 });
 app.post('/eliminaCursoAspirante', (req,res) => {
-  console.log(req.body.id);
+  console.log(req.body.boton);
   let texto = curso.eliminarinscrito(req.body.id,usuariologeado);
   res.render('aspirante', {
     nombre: usuariologeado.nombre,
@@ -116,6 +111,11 @@ app.post('/eliminaCursoAspirante', (req,res) => {
   });
 });
 
+app.get('*', (req, res) => {
+    res.render('error', {
+        estudiante: 'error mijo'
+    });
+});
 
 app.listen(3000, () => {
     console.log('Escuchando en el puerto 3000');

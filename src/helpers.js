@@ -77,6 +77,31 @@ hbs.registerHelper('listarDisponibles', () => {
       }
     }
 })
+hbs.registerHelper('selectCursos', () => {
+  listadoCursos = require('./listadoCursos.json')
+  if (!listadoCursos.length) {
+    return "no hay cursos creados"
+  }else {
+
+    let disponibles = listadoCursos.filter(cursos => cursos.estado ==="disponible")
+    if (!disponibles) {
+      return "Todos los cursos se han cerrado"
+    }else {
+      let texto ="<form action='/matricula' method='post'>";
+      texto = texto+" <div class='form-row'><div class='form-group col-md-2'><select class='form-control' style='width:200px' name='idcurso' id='idcurso' >";
+      texto = texto +"<option value ='-1'>--Seleccione--</option>";
+
+      disponibles.forEach(curso => {
+        texto = texto +'<option value='+curso.id+'>'+curso.id+' - '+curso.nombre+'</option>';
+
+      })
+      texto = texto + '</select></div><div class="form-group col-md-6">'+
+      '<button type="submit" class="btn btn-dark">Registrar</button>'+
+      '</div></div></form>';
+      return texto;
+    }
+  }
+})
 hbs.registerHelper('miscursos', (aspirante) =>{
   listadoCursos = require('./listadoCursos.json')
   if (!aspirante.listaCursos.length) {
@@ -102,41 +127,15 @@ hbs.registerHelper('miscursos', (aspirante) =>{
       texto = texto +
               "<tr>" +
               "<td>" + curso.nombre + "</td>" +
-              "<td name='idcurso'>" + curso.id + "</td>" +
+              "<td>" + curso.id + "</td>" +
               "<td>" + curso.descripcion + "</td>" +
               "<td>" + curso.valor + "</td>" +
               "<td>" + curso.modalidad + "</td>" +
               "<td>" + curso.ih + "</td>" +
               "<td>" + curso.estado + "</td>"+
-              "<td><button type='submit' class='btn btn-danger'>Eliminar</button></td></tr>";
+              "<td><button type='submit' value='"+curso.id+"' class='btn btn-danger' name='boton'>Eliminar</button></td></tr>";
     })
     texto = texto + "</tbody></table></form>";
     return texto;
   }
-})
-
-hbs.registerHelper('selectCursos', () => {
-    listadoCursos = require('./listadoCursos.json')
-    if (!listadoCursos.length) {
-      return "no hay cursos creados"
-    }else {
-
-      let disponibles = listadoCursos.filter(cursos => cursos.estado ==="disponible")
-      if (!disponibles) {
-        return "Todos los cursos se han cerrado"
-      }else {
-        let texto ="<form action='/matricula' method='post'>";
-        texto = texto+" <div class='form-row'><div class='form-group col-md-2'><select class='form-control' style='width:200px' name='idcurso' id='idcurso' >";
-        texto = texto +"<option value ='-1'>--Seleccione--</option>";
-
-        disponibles.forEach(curso => {
-          texto = texto +'<option value='+curso.id+'>'+curso.id+' - '+curso.nombre+'</option>';
-
-        })
-        texto = texto + '</select></div><div class="form-group col-md-6">'+
-        '<button type="submit" class="btn btn-dark">Registrar</button>'+
-        '</div></div></form>';
-        return texto;
-      }
-    }
 })
