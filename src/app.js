@@ -112,6 +112,19 @@ app.post('/eliminaCursoAspirante', (req,res) => {
   });
 });
 
+
+
+app.post('/eliminaAspiranteCoordinador', (req,res) => {
+  let id = req.body.botonCoordinador;
+  var array = id.split(";");
+  var idcurso = array[0];
+  var estudiante = array[1];
+   let texto = curso.eliminarinscritoCoordinador(idcurso,estudiante);
+  console.log(texto);
+   res.render('login', {});
+});
+
+
 app.get('*', (req, res) => {
     res.render('error', {
         estudiante: 'error mijo'

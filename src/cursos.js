@@ -118,9 +118,47 @@ const eliminarinscrito = (id,documento)=>{
 }
 
 
+
+const eliminarinscritoCoordinador = (id,documento)=>{
+    listar();
+    var idobtenido = id;
+    var documentoobtenido=documento;
+    listadoUsuarios = require('./listadoUsuarios.json');
+    let estudiantes = listadoUsuarios.filter(estCurso => estCurso.rol != "nn");
+    estudiantes.forEach(usuario =>{
+      if(usuario.documento == documentoobtenido){
+        let nuevosCursosEst = usuario.listaCursos.filter(estCurso => estCurso != idobtenido);
+        usuario.listaCursos = nuevosCursosEst;
+        }
+    });
+
+
+    //para eliminar el curso
+    let materias = listadoCursos.filter(lc => lc.nombre != "ASD");
+    materias.forEach(cur_so =>{
+      if(cur_so.id == idobtenido){
+        console.log("el id del curso es" + cur_so.id);
+        let nuevosCursos = cur_so.matriculados.filter(curEst => curEst != documentoobtenido);
+        cur_so.matriculados = nuevosCursos;
+        }
+    });
+
+      listadoCursos = materias;
+      listadoUsuarios = estudiantes;
+      guardar();
+      guardarUsuarios();
+
+      return "Eliminado correctamente";
+
+
+}
+
+
+
 module.exports = {
     crearcurso,
     matricularCursoId,
-    eliminarinscrito
+    eliminarinscrito,
+    eliminarinscritoCoordinador
 
 }

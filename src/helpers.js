@@ -9,6 +9,8 @@ hbs.registerHelper('listarCursos', () => {
     if (!listadoCursos.length) {
         return "no hay cursos creados"
     } else {
+
+
       let texto = "<table class='table table-striped'> \
                   <thead class='thead-dark'> \
                   <th> Nombre </th> \
@@ -37,6 +39,65 @@ hbs.registerHelper('listarCursos', () => {
       return texto;
     }
 })
+
+
+hbs.registerHelper('listarCursosCoordinador', () => {
+  listadoCursos = require('./listadoCursos.json')
+  listadoUsuarios = require('./listadoUsuarios.json')
+  let tablaUsuario =
+
+    i =1 ;
+    let texto = '';
+    if (!listadoCursos.length) {
+        return "no hay cursos creados"
+    } else {
+      listadoCursos.forEach(curso => {
+          texto = texto + '<div class="panel-group">'+
+                            '<div class="panel panel-default">'+
+                              '<div class="panel-heading">'+
+                                '<h4 class="panel-title">'+
+                                  '<a data-toggle="collapse" href="#collapse'+i+'"> Curso : '+curso.nombre+'</a>'+
+                                '</h4>'+
+                              '</div>'+
+                              '<div id="collapse'+i+'" class="panel-collapse collapse">';
+                              texto = texto+'<div class="panel-body">'+
+                              '<form action="/eliminaAspiranteCoordinador" method="post"><table class="table table-striped">' +
+                                          '<thead class="thead-dark">' +
+                                          '<th> Nombre </th>' +
+                                          '<th > Documento </th>' +
+                                          '<th> Email </th>' +
+                                          '<th> Telefono </th>' +
+                                          '<th> Rol </th>' +
+                                          '<th> Eliminar </th>' +
+                                          '</thead>' +
+                                          '<tbody>';
+                              curso.matriculados.forEach(usuario =>{
+                                    let usuarioCurso = listadoUsuarios.find(cur => cur.documento===usuario)
+                                      texto = texto +
+                                            '<tr id="idcursoestudiante">' +
+                                            '<td>' + usuarioCurso.nombre + '</td>' +
+                                            '<td>' + usuarioCurso.documento + '</td>' +
+                                            '<td>' + usuarioCurso.correo + '</td>' +
+                                            '<td>' + usuarioCurso.telefono + '</td>' +
+                                            '<td>' + usuarioCurso.rol + '</td>'+
+                                            '<td><button type="submit" value='+curso.id+';'+usuarioCurso.documento+' class="btn btn-danger" name="botonCoordinador">Eliminar</button></td></tr>';
+
+                            });
+                            texto = texto + '</tbody></table></form></div>'+'</div>'+
+                          '</div>'+
+                          '</div>'+
+                          '</div>';
+                          i++;
+      })
+      texto = texto + '';
+      return texto;
+    }
+})
+
+
+
+
+
 hbs.registerHelper('listarDisponibles', () => {
     listadoCursos = require('./listadoCursos.json')
     if (!listadoCursos.length) {
