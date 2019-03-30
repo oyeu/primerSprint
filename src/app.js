@@ -101,8 +101,9 @@ app.post('/registrocurso', (req, res) => {
     });
 });
 app.post('/eliminaCursoAspirante', (req,res) => {
-  console.log(req.body.boton);
-  let texto = curso.eliminarinscrito(req.body.id,usuariologeado);
+  let id = req.body.boton;
+  let texto = curso.eliminarinscrito(id,usuariologeado);
+  console.log(texto);
   res.render('aspirante', {
     nombre: usuariologeado.nombre,
     rol: usuariologeado.rol,

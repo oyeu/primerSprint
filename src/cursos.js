@@ -2,7 +2,7 @@ const fs = require('fs');
 const usuario = require('./usuario')
 
 let listadoCursos = [];
-
+let listadoUsuarios =[];
 const crearcurso = (nombre, id, descripcion, ih, valor, modalidad) => {
     listar();
     let curso = {
@@ -50,6 +50,14 @@ const guardar = () => {
     })
 };
 
+const guardarUsuarios = ()=> {
+  let datos = JSON.stringify(listadoUsuarios);
+  fs.writeFile('./src/listadoUsuarios.json', datos, (err)=>{
+    if (err) throw (err);
+    console.log("Usuarios guardados");
+  })
+};
+
 const matricularCursoId = (id, estudiante) => {
 
 
@@ -76,16 +84,37 @@ const matricularCursoId = (id, estudiante) => {
 
 
 const eliminarinscrito = (id,documento)=>{
-listar();
-let eliminados = listadoCursos.filter(buscar => !(buscar.id == id && buscar.documento == documento));
-if(eliminados.length == listadoCursos.length){
-        return('No se ha capturado el id para eliminar');
-}else{
-       listadoCursos=eliminados;
-       guardar();
-       listar();
-       return 'Se elimino el aspirante'
-};
+    listar();
+    var idobtenido = id;
+    var documentoobtenido=documento.documento;
+    listadoUsuarios = require('./listadoUsuarios.json');
+    let estudiantes = listadoUsuarios.filter(estCurso => estCurso.rol != "nn");
+    estudiantes.forEach(usuario =>{
+      if(usuario.documento == documentoobtenido){
+        let nuevosCursosEst = usuario.listaCursos.filter(estCurso => estCurso != idobtenido);
+        usuario.listaCursos = nuevosCursosEst;
+        }
+    });
+
+
+    //para eliminar el curso
+    let materias = listadoCursos.filter(lc => lc.nombre != "ASD");
+    materias.forEach(cur_so =>{
+      if(cur_so.id == idobtenido){
+        console.log("el id del curso es" + cur_so.id);
+        let nuevosCursos = cur_so.matriculados.filter(curEst => curEst != documentoobtenido);
+        cur_so.matriculados = nuevosCursos;
+        }
+    });
+
+      listadoCursos = materias;
+      listadoUsuarios = estudiantes;
+      guardar();
+      guardarUsuarios();
+
+      return "Eliminado correctamente";
+
+
 }
 
 
