@@ -34,65 +34,42 @@ app.get('/registro', (req, res) => {
 app.get('/cursoscreados', (req, res) => {
     res.render('cursoscreados', {});
 });
+app.get('*', (req, res) => {
+    res.render('error', {
+        estudiante: 'error mijo'
+    });
+});
 app.get('/registrocurso', (req, res) => {
     res.render('registrocurso', {});
 });
 
-app.post('/matricula', (req,res) => {  
+app.post('/matricula', (req,res) => {
   let texto = curso.matricularCursoId(parseInt(req.body.idcurso), usuariologeado);
   console.log(texto);
 
   usuariologeado=texto[0];
   let mensaje =""
-
     if(texto[1]){
-        mensaje ="Estudiante ingresado correctamente";
+      mensaje ="Estudiante ingresado correctamente";
     }else{
       mensaje="Ya esta registrado al curso"
   }
-
-res.render('aspirante', {
-      nombre: usuariologeado.nombre,
-      rol: usuariologeado.rol,
-      confirmacion:mensaje,
-      aspirante: usuariologeado
+  res.render('aspirante', {
+    nombre: usuariologeado.nombre,
+    rol: usuariologeado.rol,
+    confirmacion:mensaje,
+    aspirante: usuariologeado
   });
 
-})
-
+});
 app.post('/registro', (req, res) => {
-    res.render('registroexitoso', {
-        nombre: req.body.nombre,
-        cedula: parseInt(req.body.cedula),
-        correo: req.body.correo,
-        telefono: parseInt(req.body.telefono)
-    });
-});
-
-app.post('/eliminaCursoAspirante', (req,res) => {    
-   console.log(req.body.id);
-  let texto = curso.eliminarinscrito(req.body.id,usuariologeado);
-   res.render('aspirante', {
-      nombre: usuariologeado.nombre,
-      rol: usuariologeado.rol,
-      confirmacion:texto,
-      aspirante: usuariologeado
+  res.render('registroexitoso', {
+    nombre: req.body.nombre,
+    cedula: parseInt(req.body.cedula),
+    correo: req.body.correo,
+    telefono: parseInt(req.body.telefono)
   });
-  
-})
-
-
-app.post('/registrocurso', (req, res) => {
-    res.render('mostrarcurso', {
-        nombre: req.body.nombre,
-        id: parseInt(req.body.id),
-        descripcion: req.body.descripcion,
-        valor: parseInt(req.body.valor),
-        modalidad: req.body.modalidad,
-        ih: parseInt(req.body.ih)
-    });
 });
-
 app.post('/login', (req, res) => {
     let exito = usuario.autenticar(req.body.nombre, parseInt(req.body.cedula));
     if (!exito) {
@@ -117,13 +94,28 @@ app.post('/login', (req, res) => {
                 break;
         }
     }
-})
-
-app.get('*', (req, res) => {
-    res.render('error', {
-        estudiante: 'error mijo'
+});
+app.post('/registrocurso', (req, res) => {
+    res.render('mostrarcurso', {
+        nombre: req.body.nombre,
+        id: parseInt(req.body.id),
+        descripcion: req.body.descripcion,
+        valor: parseInt(req.body.valor),
+        modalidad: req.body.modalidad,
+        ih: parseInt(req.body.ih)
     });
 });
+app.post('/eliminaCursoAspirante', (req,res) => {
+  console.log(req.body.id);
+  let texto = curso.eliminarinscrito(req.body.id,usuariologeado);
+  res.render('aspirante', {
+    nombre: usuariologeado.nombre,
+    rol: usuariologeado.rol,
+    confirmacion:texto,
+    aspirante: usuariologeado
+  });
+});
+
 
 app.listen(3000, () => {
     console.log('Escuchando en el puerto 3000');

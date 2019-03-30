@@ -4,7 +4,6 @@ const curso = require('./cursos');
 
 hbs.registerHelper('crearUsuario', usuario.crear);
 hbs.registerHelper('crearCurso', curso.crearcurso);
-
 hbs.registerHelper('listarCursos', () => {
     listadoCursos = require('./listadoCursos.json')
     if (!listadoCursos.length) {
@@ -26,7 +25,7 @@ hbs.registerHelper('listarCursos', () => {
         texto = texto +
                 '<tr id="idcursoestudiante">' +
                 '<td>' + curso.nombre + '</td>' +
-                '<td>' + curso.id + '<tyd>' +
+                '<td>' + curso.id + '</td>' +
                 '<td>' + curso.descripcion + '</td>' +
                 '<td>' + curso.valor + '</td>' +
                 '<td>' + curso.modalidad + '</td>' +
@@ -38,7 +37,6 @@ hbs.registerHelper('listarCursos', () => {
       return texto;
     }
 })
-
 hbs.registerHelper('listarDisponibles', () => {
     listadoCursos = require('./listadoCursos.json')
     if (!listadoCursos.length) {
@@ -66,7 +64,7 @@ hbs.registerHelper('listarDisponibles', () => {
           texto = texto +
                   '<tr>' +
                   '<td>' + curso.nombre + '</td>' +
-                  '<td>' + curso.id + '<tyd>' +
+                  '<td>' + curso.id + '</td>' +
                   '<td>' + curso.descripcion + '</td>' +
                   '<td>' + curso.valor + '</td>' +
                   '<td>' + curso.modalidad + '</td>' +
@@ -79,14 +77,14 @@ hbs.registerHelper('listarDisponibles', () => {
       }
     }
 })
-
 hbs.registerHelper('miscursos', (aspirante) =>{
   listadoCursos = require('./listadoCursos.json')
   if (!aspirante.listaCursos.length) {
     return "No tienes cursos inscritos"
   }else {
 
-    let texto = "<form action='/eliminaCursoAspirante' method='post'><table class='table table-striped'> \
+    let texto = "<form action='/eliminaCursoAspirante' method='post'>" +
+                "<table class='table table-striped'> \
                 <thead class='thead-dark'> \
                 <th> Nombre </th> \
                 <th> Id </th> \
@@ -102,22 +100,20 @@ hbs.registerHelper('miscursos', (aspirante) =>{
     aspirante.listaCursos.forEach(id => {
       let curso = listadoCursos.find(crc => crc.id === id);
       texto = texto +
-              '<tr>' +
-              '<td>' + curso.nombre + '</td>' +
-              '<td>' + curso.id + '<tyd>' +
-              '<td>' + curso.descripcion + '</td>' +
-              '<td>' + curso.valor + '</td>' +
-              '<td>' + curso.modalidad + '</td>' +
-              '<td>' + curso.ih + '</td>' +
-              '<td>' + curso.estado + '</td>'+
-              '<td><button type="submit" class="btn btn-danger">Eliminar</button></td></tr>';
+              "<tr>" +
+              "<td>" + curso.nombre + "</td>" +
+              "<td name='idcurso'>" + curso.id + "</td>" +
+              "<td>" + curso.descripcion + "</td>" +
+              "<td>" + curso.valor + "</td>" +
+              "<td>" + curso.modalidad + "</td>" +
+              "<td>" + curso.ih + "</td>" +
+              "<td>" + curso.estado + "</td>"+
+              "<td><button type='submit' class='btn btn-danger'>Eliminar</button></td></tr>";
     })
-    texto = texto + '</tbody></table></form>';
+    texto = texto + "</tbody></table></form>";
     return texto;
   }
 })
-
-
 
 hbs.registerHelper('selectCursos', () => {
     listadoCursos = require('./listadoCursos.json')

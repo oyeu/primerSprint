@@ -1,9 +1,6 @@
 {{>headercoordi}}
    <div class="text-center">
-    <h2>
-      Registro curso
-    </h2>
-
+    <h2>Registro curso</h2>
    </div>
     <div class="container">
 <form action="/registrocurso" method="post">
@@ -16,16 +13,11 @@
       <label for="inputEmail4">Identificador</label>
       <input type="number" class="form-control" id="inputEmail4" placeholder="Identificador" name="id" required>
     </div>
-    
   </div>
   <div class="form-group">
     <label for="inputAddress">Descripcion</label>
     <input type="text" class="form-control" id="inputAddress" placeholder="Descripcion del curso" name="descripcion" required>
   </div>
-  {{!-- <div class="form-group">
-    <label for="inputAddress2">Address 2</label>
-    <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-  </div> --}}
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputCity">Valor</label>
@@ -44,32 +36,9 @@
       <input type="number" class="form-control" id="inputZip" name="ih" >
     </div>
   </div>
- {{!--  <div class="form-group">
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" id="gridCheck">
-      <label class="form-check-label" for="gridCheck">
-        Check me out
-      </label>
-    </div>
-  </div> --}}
   <div class="text-center">
   <button type="submit" class="btn btn-primary">registrar curso</button>
-
   </div>
 </form>
-
 </div>
-
-   {{!--  <form action="/registrocurso" method="post">
-      <input type="text" name="nombre" required>
-      <input type="number" name="id" required>
-      <input type="text" name="descripcion" required>
-      <input type="number" name="valor" required>
-       <input type="text" name="modalidad">
-        <input type="number" name="ih" required>
-      <button>registrar curso</button>
-    </form>
-
-    <button type="button" name="Volver al inicio" onclick="location.href='./'">Volver al inicio</button> --}}
-
 {{>footer}}
