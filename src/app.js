@@ -23,19 +23,19 @@ let usuariologeado;
 
 app.set('view engine', 'hbs');
 app.get('/', (req, res) => {
-    res.render('index', {});
+  res.render('index', {});
 });
 app.get('/login', (req, res) => {
-    res.render('login', {});
+  res.render('login', {});
 });
 app.get('/registro', (req, res) => {
-    res.render('registro', {});
+  res.render('registro', {});
 });
 app.get('/cursoscreados', (req, res) => {
-    res.render('cursoscreados', {});
+  res.render('cursoscreados', {});
 });
 app.get('/registrocurso', (req, res) => {
-    res.render('registrocurso', {});
+  res.render('registrocurso', {});
 });
 
 app.post('/matricula', (req,res) => {
@@ -44,10 +44,10 @@ app.post('/matricula', (req,res) => {
 
   usuariologeado=texto[0];
   let mensaje =""
-    if(texto[1]){
-      mensaje ="Estudiante ingresado correctamente";
-    }else{
-      mensaje="Ya esta registrado al curso"
+  if(texto[1]){
+    mensaje ="Estudiante ingresado correctamente";
+  }else{
+    mensaje="Ya esta registrado al curso"
   }
   res.render('aspirante', {
     nombre: usuariologeado.nombre,
@@ -66,39 +66,39 @@ app.post('/registro', (req, res) => {
   });
 });
 app.post('/login', (req, res) => {
-    let exito = usuario.autenticar(req.body.nombre, parseInt(req.body.cedula));
-    if (!exito) {
-        res.render('login', {
-            alerta: 'Nombre de usuario o cedula incorrectos'
-        });
-    } else {
-        usuariologeado=exito;
-        switch (exito.rol) {
-            case 'aspirante':
-                res.render('aspirante', {
-                    nombre: exito.nombre,
-                    rol: exito.rol,
-                    aspirante:usuariologeado
-                });
-                break;
-            case 'coordinador':
-                res.render('coordinador', {
-                    nombre: exito.nombre,
-                    rol: exito.rol
-                });
-                break;
-        }
+  let exito = usuario.autenticar(req.body.nombre, parseInt(req.body.cedula));
+  if (!exito) {
+    res.render('login', {
+      alerta: 'Nombre de usuario o cedula incorrectos'
+    });
+  } else {
+    usuariologeado=exito;
+    switch (exito.rol) {
+      case 'aspirante':
+      res.render('aspirante', {
+        nombre: exito.nombre,
+        rol: exito.rol,
+        aspirante:usuariologeado
+      });
+      break;
+      case 'coordinador':
+      res.render('coordinador', {
+        nombre: exito.nombre,
+        rol: exito.rol
+      });
+      break;
     }
+  }
 });
 app.post('/registrocurso', (req, res) => {
-    res.render('mostrarcurso', {
-        nombre: req.body.nombre,
-        id: parseInt(req.body.id),
-        descripcion: req.body.descripcion,
-        valor: parseInt(req.body.valor),
-        modalidad: req.body.modalidad,
-        ih: parseInt(req.body.ih)
-    });
+  res.render('mostrarcurso', {
+    nombre: req.body.nombre,
+    id: parseInt(req.body.id),
+    descripcion: req.body.descripcion,
+    valor: parseInt(req.body.valor),
+    modalidad: req.body.modalidad,
+    ih: parseInt(req.body.ih)
+  });
 });
 app.post('/eliminaCursoAspirante', (req,res) => {
   let id = req.body.boton;
@@ -111,26 +111,35 @@ app.post('/eliminaCursoAspirante', (req,res) => {
     aspirante: usuariologeado
   });
 });
-
-
-
+app.post('/cambioEstado', (req,res) => {
+  curso.cambiarEstado(parseInt(req.body.botonCambiar));
+  res.render('coordinador', {
+    nombre: usuariologeado.nombre,
+    rol: usuariologeado.rol
+  });
+})
 app.post('/eliminaAspiranteCoordinador', (req,res) => {
   let id = req.body.botonCoordinador;
   var array = id.split(";");
   var idcurso = array[0];
   var estudiante = array[1];
-   let texto = curso.eliminarinscritoCoordinador(idcurso,estudiante);
+  let texto = curso.eliminarinscritoCoordinador(idcurso,estudiante);
   console.log(texto);
-   res.render('login', {});
+  res.render('coordinador', {});
+});
+
+app.post('/eliminaAspiranteCoordinador2', (req,res) => {
+  let texto = curso.eliminarinscritoCoordinador(req.body.id,req.body.cedula);
+  res.render('coordinador', {});
 });
 
 
 app.get('*', (req, res) => {
-    res.render('error', {
-        estudiante: 'error mijo'
-    });
+  res.render('error', {
+    estudiante: 'error mijo'
+  });
 });
 
 app.listen(3000, () => {
-    console.log('Escuchando en el puerto 3000');
+  console.log('Escuchando en el puerto 3000');
 });

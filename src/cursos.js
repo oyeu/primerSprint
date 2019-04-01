@@ -81,8 +81,6 @@ const matricularCursoId = (id, estudiante) => {
   }
 }
 
-
-
 const eliminarinscrito = (id,documento)=>{
     listar();
     var idobtenido = id;
@@ -116,8 +114,6 @@ const eliminarinscrito = (id,documento)=>{
 
 
 }
-
-
 
 const eliminarinscritoCoordinador = (id,documento)=>{
     listar();
@@ -153,12 +149,23 @@ const eliminarinscritoCoordinador = (id,documento)=>{
 
 }
 
-
+const cambiarEstado = (id) => {
+  listar();
+  let seleccionado = listadoCursos.find(curso => curso.id === id);
+  console.log(seleccionado);
+  if (seleccionado.estado === 'disponible') {
+    seleccionado.estado = 'cerrado'
+  }else {
+    seleccionado.estado = 'disponible'
+  }
+  guardar();
+}
 
 module.exports = {
     crearcurso,
     matricularCursoId,
     eliminarinscrito,
-    eliminarinscritoCoordinador
+    eliminarinscritoCoordinador,
+    cambiarEstado
 
 }
