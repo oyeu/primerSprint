@@ -19,7 +19,7 @@ app.use('/js', express.static(dirNode_modules + '/jquery/dist'));
 app.use('/js', express.static(dirNode_modules + '/popper.js/dist'));
 app.use('/js', express.static(dirNode_modules + '/bootstrap/dist/js'));
 
-let usuariologeado;
+var usuariologeado;
 
 app.set('view engine', 'hbs');
 app.get('/', (req, res) => {
@@ -38,6 +38,12 @@ app.get('/registrocurso', (req, res) => {
   res.render('registrocurso', {});
 });
 
+app.post('/coordinador', (req,res) =>{
+  res.render('coordinador', {
+    nombre: usuariologeado.nombre,
+    rol: usuariologeado.rol,
+  });
+})
 app.post('/matricula', (req,res) => {
   let texto = curso.matricularCursoId(parseInt(req.body.idcurso), usuariologeado);
   console.log(texto);
@@ -84,7 +90,7 @@ app.post('/login', (req, res) => {
       case 'coordinador':
       res.render('coordinador', {
         nombre: exito.nombre,
-        rol: exito.rol
+        rol: exito.rol,
       });
       break;
     }
@@ -130,7 +136,10 @@ app.post('/eliminaAspiranteCoordinador', (req,res) => {
 
 app.post('/eliminaAspiranteCoordinador2', (req,res) => {
   let texto = curso.eliminarinscritoCoordinador(req.body.id,req.body.cedula);
-  res.render('coordinador', {});
+  res.render('datoscurso', {
+    id:req.body.id,
+    usuario:usuariologeado
+  });
 });
 
 

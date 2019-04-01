@@ -106,7 +106,6 @@ hbs.registerHelper('listarCursosCoordinador', () => {
       '<th > Documento </th>' +
       '<th> Email </th>' +
       '<th> Telefono </th>' +
-      '<th> Rol </th>' +
       '<th> Eliminar </th>' +
       '</thead>' +
       '<tbody>';
@@ -118,7 +117,6 @@ hbs.registerHelper('listarCursosCoordinador', () => {
         '<td>' + usuarioCurso.documento + '</td>' +
         '<td>' + usuarioCurso.correo + '</td>' +
         '<td>' + usuarioCurso.telefono + '</td>' +
-        '<td>' + usuarioCurso.rol + '</td>' +
         '<td><button type="submit" value=' + curso.id + ';' + usuarioCurso.documento + ' class="btn btn-danger" name="botonCoordinador">Eliminar</button></td>'+
         '</tr>';
 
@@ -243,6 +241,32 @@ hbs.registerHelper('miscursos', (aspirante) => {
 })
 
 hbs.registerHelper('integrantesCurso', (identificador) => {
+  listadoCursos = require('./listadoCursos.json');
+  listadoUsuarios = require('./listadoUsuarios.json');
+
+  let curso = listadoCursos.find(cu => cu.id == identificador)
+  console.log(curso);
   console.log(identificador);
-  return identificador
+  let texto = '<h3>Lista integrantes del curso '+ curso.nombre + '</h3><br>'
+  texto=texto+"<table class='table table-striped'> \
+              <thead class='thead-dark'> \
+              <th> Nombre </th> \
+              <th > Documento </th> \
+              <th> Email </th> \
+              <th> Teléfono </th> \
+              </thead> \
+              <tbody>";
+
+  curso.matriculados.forEach(usuario => {
+    let usuarioCurso = listadoUsuarios.find(cur => cur.documento === usuario)
+    texto = texto +
+    '<tr id="idcursoestudiante">' +
+    '<td>' + usuarioCurso.nombre + '</td>' +
+    '<td>' + usuarioCurso.documento + '</td>' +
+    '<td>' + usuarioCurso.correo + '</td>' +
+    '<td>' + usuarioCurso.telefono + '</td></tr>'
+
+  })
+  texto = texto + '</tbody></table>';
+  return texto;
 })
