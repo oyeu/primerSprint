@@ -47,29 +47,30 @@ hbs.registerHelper('listarCursos2', () => {
     if (!listadoCursos.length) {
         return "no hay cursos creados"
     } else {
-
-
+      let disponibles = listadoCursos.filter(cursos => cursos.estado === "disponible")
+      if (!disponibles) {
+          return "Todos los cursos se han cerrado"
+      } else {
         let texto = "<div class='accordion' id='accordionExample'>";
         i = 1;
-        listadoCursos.forEach(curso => {
+        disponibles.forEach(curso => {
             texto = texto +
                 `<div class="card">
             <div class="card-header" id="heading${i}">
               <h2 class="mb-0">
                 <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse${i}" aria-expanded="true" aria-controls="collapse${i}">
-                  ${curso.nombre}
+                  Nombre: ${curso.nombre} <br>
+                  Identificador de curso: ${curso.id} <br>
+                  Valor del curso: ${curso.valor} <br>
                 </button>
               </h2>
             </div>
 
-            <div id="collapse${i}" class="collapse show" aria-labelledby="heading${i}" data-parent="#accordionExample">
+            <div id="collapse${i}" class="collapse" aria-labelledby="heading${i}" data-parent="#accordionExample">
               <div class="card-body">
-               El identificadordel curso es:  ${curso.id}<br>
-               Descripcion del curso: ${curso.descripcion}<br>
-               EL valor del curso es: ${curso.valor}<br>
+               Descripcion del curso:  ${curso.descripcion}<br>
                La modalidad es: ${curso.modalidad}<br>
                La intensidad horaria es: ${curso.ih}<br>
-               El estado del curso es: ${curso.estado}
               </div>
             </div>
           </div>`
@@ -79,6 +80,7 @@ hbs.registerHelper('listarCursos2', () => {
         texto = texto + '</div>';
         return texto;
     }
+  }
 })
 
 
@@ -135,11 +137,6 @@ hbs.registerHelper('listarCursosCoordinador', () => {
         return texto;
     }
 })
-
-
-
-
-
 hbs.registerHelper('listarDisponibles', () => {
     listadoCursos = require('./listadoCursos.json')
     if (!listadoCursos.length) {
