@@ -1,3 +1,4 @@
+
 const hbs = require('hbs');
 const usuario = require('./usuario');
 const curso = require('./cursos');
@@ -44,8 +45,6 @@ hbs.registerHelper('listarCursos', () => {
 hbs.registerHelper('listarCursosCoordinador', () => {
   listadoCursos = require('./listadoCursos.json')
   listadoUsuarios = require('./listadoUsuarios.json')
-  let tablaUsuario =
-
     i =1 ;
     let texto = '';
     if (!listadoCursos.length) {
@@ -91,51 +90,6 @@ hbs.registerHelper('listarCursosCoordinador', () => {
       })
       texto = texto + '';
       return texto;
-    }
-})
-
-
-
-
-
-hbs.registerHelper('listarDisponibles', () => {
-    listadoCursos = require('./listadoCursos.json')
-    if (!listadoCursos.length) {
-      return "no hay cursos creados"
-    }else {
-
-      let disponibles = listadoCursos.filter(cursos => cursos.estado ==="disponible")
-      if (!disponibles) {
-        return "Todos los cursos se han cerrado"
-      }else {
-
-        let texto = "<table class='table table-striped'> \
-                    <thead class='thead-dark'> \
-                    <th> Nombre </th> \
-                    <th> Id </th> \
-                    <th> Descripción </th> \
-                    <th> Valor </th> \
-                    <th> Modalidad </th> \
-                    <th> Intensidad horaria </th> \
-                    <th> estado </th> \
-                    </thead> \
-                    <tbody>";
-
-        disponibles.forEach(curso => {
-          texto = texto +
-                  '<tr>' +
-                  '<td>' + curso.nombre + '</td>' +
-                  '<td>' + curso.id + '</td>' +
-                  '<td>' + curso.descripcion + '</td>' +
-                  '<td>' + curso.valor + '</td>' +
-                  '<td>' + curso.modalidad + '</td>' +
-                  '<td>' + curso.ih + '</td>' +
-                  '<td>' + curso.estado + '</td></tr>';
-
-        })
-        texto = texto + '</tbody></table>';
-        return texto;
-      }
     }
 })
 hbs.registerHelper('selectCursos', () => {
